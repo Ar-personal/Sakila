@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32630.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sakila", "Sakila\Sakila.csproj", "{C78E3A8F-8B70-4D7A-A39A-5D49639C0D99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sakila.Testing", "Sakila.Testing\Sakila.Testing.csproj", "{C34447B5-4D17-4D2D-A87D-46F210E80D3D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C78E3A8F-8B70-4D7A-A39A-5D49639C0D99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C78E3A8F-8B70-4D7A-A39A-5D49639C0D99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C78E3A8F-8B70-4D7A-A39A-5D49639C0D99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C78E3A8F-8B70-4D7A-A39A-5D49639C0D99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C34447B5-4D17-4D2D-A87D-46F210E80D3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C34447B5-4D17-4D2D-A87D-46F210E80D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C34447B5-4D17-4D2D-A87D-46F210E80D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C34447B5-4D17-4D2D-A87D-46F210E80D3D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {678B5AC5-5A69-4632-B113-D4CAEEC98F1F}
+	EndGlobalSection
+EndGlobal
