@@ -12,17 +12,17 @@ namespace Sakila.Services
     public class ActorRepository
     {
         sakilaContext context = new sakilaContext();
-        public Dictionary<string, List<string>> GetAllActors()
+        public IQueryable GetAllActors()
         {
-            Dictionary<string, List<string>> actorDict = new Dictionary<string, List<string>>();
-            List<string> ids = context.Actors.Select(a => a.ActorId.ToString()).ToList();
-            List<string> fnames =  context.Actors.Select(a => a.FirstName).ToList();
-            List<string> lnames = context.Actors.Select(a => a.LastName).ToList();
-            actorDict.Add("ids", ids);
-            actorDict.Add("firstNames", fnames);
-            actorDict.Add("lastNames", lnames);
 
-            return actorDict;
+            IQueryable actors;
+            actors = context.Actors.Select(a => new {
+                a.ActorId,
+                a.FirstName,
+                a.LastName
+            }).ToList().AsQueryable();
+
+            return actors;
         }
 
 
@@ -32,12 +32,12 @@ namespace Sakila.Services
         }
 
 
-        public IQueryable GetActorNameViaFirstName(string firstName)
+        public IQueryable GetActorNameByFirstName(string firstName)
         {
 
             IQueryable actors;
-            actors = context.Actors.Select(a => new
-              {
+            actors = context.Actors.Where(a => a.FirstName.Equals(firstName)).Select(a => new{
+                a.ActorId,
                 a.FirstName,
                 a.LastName
             }).ToList().AsQueryable();
@@ -46,21 +46,16 @@ namespace Sakila.Services
             return actors;
         }
 
-        public async Task AddActorAsync(short ActorId, string FirstName, string LastName)
+        public async Task AddActorAsync(string FirstName, string LastName)
         {
-            if (!context.Actors.Any(i => i.ActorId == ActorId))
-            {
+
                 context.Actors.Add(new Actor()
                 {
-                    ActorId = ActorId,
                     FirstName = FirstName,
                     LastName = LastName
                 });
 
-                var existingItem = context.Actors.FirstOrDefault(i => i.ActorId == ActorId);
                 await context.SaveChangesAsync();
-            }
-
         }
 
 
@@ -71,7 +66,7 @@ namespace Sakila.Services
             context.SaveChanges();
         }
 
-        public void DeleteAsync(int ActorId)
+        public void DeleteAsync(short ActorId)
         {
 
             var actor = context.Actors.Where(s => s.ActorId.Equals((short) ActorId)).Delete();

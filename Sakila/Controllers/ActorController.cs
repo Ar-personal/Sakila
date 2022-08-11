@@ -20,7 +20,7 @@ namespace Sakila.Controllers
         }
 
         [HttpGet("/getAllActors")]
-        public Dictionary<string, List<string>> GetAllActors()
+        public IQueryable GetAllActors()
         {
             return actorRepository.GetAllActors();
         }
@@ -28,7 +28,7 @@ namespace Sakila.Controllers
         [HttpGet("/getActorByFirstName/{firstName=string}")]
         public IQueryable GetActorByFirstName(string firstName)
         {
-            return actorRepository.GetActorNameViaFirstName(firstName);
+            return actorRepository.GetActorNameByFirstName(firstName);
         }
 
 
@@ -39,13 +39,13 @@ namespace Sakila.Controllers
             return actorRepository.GetActorNameViaId((short) ActorId);
         }
 
-        [HttpPut("/putActor/{ActorId:int}/{FirstName=string}/{LastName=string}")]
-        public void Put(int ActorId, string FirstName, string LastName) {
-            actorRepository.AddActorAsync((short) ActorId, FirstName, LastName);
+        [HttpPut("/putActor/{FirstName=string}/{LastName=string}")]
+        public void Put(string FirstName, string LastName) {
+            actorRepository.AddActorAsync(FirstName, LastName);
         }
 
 
-        [HttpPatch("/updateActorById/{ActorId:int}/{firstName=string}/{lastName=string}")]
+        [HttpPut("/updateActorById/{ActorId:int}/{firstName=string}/{lastName=string}")]
         public void UpdateActorById(int ActorId, string firstName, string lastName) {
             actorRepository.UpdateActorById((short) ActorId, firstName, lastName);
         }
