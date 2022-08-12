@@ -20,7 +20,7 @@ Scenario: Add a new actor to the database
     | firstName | lastName |
     | Alex      | Reid     |
     | Taylor    | Bromley  |
-    | Adam      | Watkins  |
+    | Adam      | Watson  |
 
 
 @3
@@ -51,5 +51,18 @@ Scenario: Update an actors details via actorId
     | actorId | firstName | lastName |
     | 201     | Alex      | Reid     |
     | 202     | Taylor    | Bromley  |
-    | 203     | Adam      | Watkins  |
+    | 203     | Adam      | Watson  |
+
+
+@5
+Scenario: get an actors films using an id and a table join
+    Given I am a user interacting with the database api
+    When I make a get request to GetActorFilmsById with <1>
+    Then the response status code is "200"
+    And reasonPhrase is "OK"
+
+
+
+
+
 

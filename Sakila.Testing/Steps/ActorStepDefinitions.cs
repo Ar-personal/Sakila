@@ -112,7 +112,6 @@ namespace Sakila.Testing.Features
             Response = await _client.PutAsync(url, data);
             responseString = await Response.Content.ReadAsStringAsync();
             reasonPhrase = Response.ReasonPhrase;
-            model = JsonConvert.DeserializeObject<IEnumerable<Actor>>(responseString);
         }
 
         [Then(@"actor details match (.*) and (.*)")]
@@ -123,6 +122,17 @@ namespace Sakila.Testing.Features
             Assert.AreEqual(actor.LastName, expectedLastName);
         }
 
+        //scenario 5
+
+        [When(@"I make a get request to GetActorFilmsById with (.*)")]
+        public async Task WhenIMakeAGetRequestToGetActorFilmByIdWith(string Id)
+        {
+            var url = new Uri("https://sakila20220809143255.azurewebsites.net/GetActorFilmsById/" + firstName);
+            Response = await _client.GetAsync(url);
+            responseString = await Response.Content.ReadAsStringAsync();
+            reasonPhrase = Response.ReasonPhrase;
+            model = JsonConvert.DeserializeObject<IEnumerable<Actor>>(responseString);
+        }
 
 
     }

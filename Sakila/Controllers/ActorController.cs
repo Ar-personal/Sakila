@@ -45,9 +45,24 @@ namespace Sakila.Controllers
         }
 
 
+
+
+
         [HttpPut("/updateActorById/{ActorId:int}/{firstName=string}/{lastName=string}")]
         public void UpdateActorById(int ActorId, string firstName, string lastName) {
             actorRepository.UpdateActorById((short) ActorId, firstName, lastName);
+        }
+
+
+        [HttpPut("/UpdateFilmByActorId/{ActorId:int}/{filmTitle=string}/{filmDesc=string}/{filmRating=string}")]
+        public void UpdateFilmByActorId(int ActorId, string filmTitle, string filmDesc, string filmRating)
+        {
+            actorRepository.UpdateActorById((short)ActorId, filmTitle, filmDesc, filmRating);
+        }
+
+        [HttpGet("/getActorFilmsById/{ActorId:int}")]
+        public void getActorFilmsById(int ActorId) {
+            actorRepository.GetActorFilmsById((short)ActorId);
         }
 
         [HttpDelete("/DeleteActorById/{ActorId:int}")]

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Sakila.Models;
 using System.Web;
 using Z.EntityFramework.Plus;
+using LinqKit;
 
 namespace Sakila.Services
 {
@@ -64,6 +65,59 @@ namespace Sakila.Services
             actor.FirstName = firstName;
             actor.LastName = lastName;
             context.SaveChanges();
+        }
+
+        public object GetActorFilmsById(short ActorId) {
+            
+            object anonObj()
+            {
+                return new
+                {
+                    actorFilms = (from actor in context.Actors
+                                  join filmactor in context.FilmActors
+                                  on actor.ActorId equals filmactor.ActorId
+                                  join film in context.Films
+                                  on filmactor.ActorId equals film.FilmId
+                                  where (ActorId == film.FilmId)
+                                  select new
+                                  {
+                                      actorFirstName = actor.FirstName,
+                                      actorLastName = actor.LastName,
+                                      filmTitle = film.Title,
+                                      filmDesc = film.Description,
+                                      filmRating = film.Rating
+                                  }).ToList()
+                };
+            }
+
+            dynamic newtype = anonObj();
+            return newtype;
+        }
+
+
+        public void UpdateFilmByActorId(short ActorId, string filmTitle, string filmDesc, string filmRating)
+        {
+            var ft = filmTitle;
+
+            IQueryable editable;
+            object ob()
+            {
+                return new
+                {
+                    editable = (from actor in context.Actors
+                                join filmactor in context.FilmActors
+                                on actor.ActorId equals filmactor.ActorId
+                                join film in context.Films
+                                on filmactor.ActorId equals film.FilmId
+                                where (ActorId == film.FilmId)
+                                select new {
+                                     title = film.Title
+                                
+                                }).AsQueryable()
+                };
+
+
+            }
         }
 
         public void DeleteAsync(short ActorId)
