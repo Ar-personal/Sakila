@@ -1,0 +1,10 @@
+
+.col-lg-4{
+    border-left: 2px solid black;
+}
+
+.col-lg-4, form{
+    padding-top: 2vw;
+}
+
+

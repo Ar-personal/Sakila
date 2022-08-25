@@ -57,7 +57,7 @@ namespace Sakila.Controllers
         [HttpPut("/UpdateFilmByActorId/{ActorId:int}/{filmTitle=string}/{filmDesc=string}/{filmRating=string}")]
         public void UpdateFilmByActorId(int ActorId, string filmTitle, string filmDesc, string filmRating)
         {
-            actorRepository.UpdateActorById((short)ActorId, filmTitle, filmDesc, filmRating);
+            actorRepository.UpdateFilmByActorId((short)ActorId, filmTitle, filmDesc, filmRating);
         }
 
         [HttpGet("/getActorFilmsById/{ActorId:int}")]

@@ -114,7 +114,7 @@ this.ScenarioInitialize(scenarioInfo);
         [NUnit.Framework.CategoryAttribute("2")]
         [NUnit.Framework.TestCaseAttribute("Alex", "Reid", null)]
         [NUnit.Framework.TestCaseAttribute("Taylor", "Bromley", null)]
-        [NUnit.Framework.TestCaseAttribute("Adam", "Watkins", null)]
+        [NUnit.Framework.TestCaseAttribute("Adam", "Watson", null)]
         public void AddANewActorToTheDatabase(string firstName, string lastName, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -206,7 +206,7 @@ this.ScenarioInitialize(scenarioInfo);
         [NUnit.Framework.CategoryAttribute("4")]
         [NUnit.Framework.TestCaseAttribute("201", "Alex", "Reid", null)]
         [NUnit.Framework.TestCaseAttribute("202", "Taylor", "Bromley", null)]
-        [NUnit.Framework.TestCaseAttribute("203", "Adam", "Watkins", null)]
+        [NUnit.Framework.TestCaseAttribute("203", "Adam", "Watson", null)]
         public void UpdateAnActorsDetailsViaActorId(string actorId, string firstName, string lastName, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -248,6 +248,41 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
 #line 48
     testRunner.Then(string.Format("actor details match {0} and {1}", firstName, lastName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("get an actors films using an id and a table join")]
+        [NUnit.Framework.CategoryAttribute("5")]
+        public void GetAnActorsFilmsUsingAnIdAndATableJoin()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "5"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("get an actors films using an id and a table join", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 58
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 59
+    testRunner.Given("I am a user interacting with the database api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 60
+    testRunner.When("I make a get request to GetActorFilmsById with <1>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 61
+    testRunner.Then("the response status code is \"200\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 62
+    testRunner.And("reasonPhrase is \"OK\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

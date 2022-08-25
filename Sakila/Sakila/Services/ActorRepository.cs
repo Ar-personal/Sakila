@@ -28,7 +28,7 @@ namespace Sakila.Services
 
 
         public IQueryable GetActorNameViaId(short id){
-            IQueryable actor = context.Actors.Where(a => a.ActorId.Equals(id)).Select(a => new{a.FirstName, a.LastName}).AsQueryable();
+            IQueryable actor = context.Actors.Where(a => a.ActorId.Equals(id)).Select(a => new{a.FirstName, a.LastName, a.FilmActors}).AsQueryable();
             return actor;
         }
 

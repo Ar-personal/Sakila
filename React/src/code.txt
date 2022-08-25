@@ -1,0 +1,42 @@
+import logo from './logo.svg';
+import './App.css';
+import React, { useState, useEffect } from 'react';
+
+const App = () => {
+
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    fetch('https://sakila20220809143255.azurewebsites.net/getActorById/2', {
+      headers: {},
+      method: "GET"
+    })
+     .then((response) => response.json())
+     .then((data) => {
+      console.log(data);
+      setPosts(data)
+  })
+  .catch((err) => {
+      console.log(err.message);
+  });
+}, []);
+
+  return (
+
+   
+  <div className="posts-container">
+     {posts.map((post) => {
+        return (
+           <div className="actorId">
+              <h2 className="actor-fn">{post.firstName}</h2>
+              <p className="actorn-sn">{post.lastName}</p>
+           </div>
+        );
+     })}
+  </div>
+  
+  );
+};
+
+
+
+export default App;
