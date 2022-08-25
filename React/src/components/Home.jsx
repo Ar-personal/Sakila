@@ -47,9 +47,6 @@ function Home(){
     console.log("form submitted")
       FetchFilm('https://sakila20220809143255.azurewebsites.net/getFilmById/', filmData.filmId);
       DisplayFilm(filmData)
-      // <div class = "col-lg-4">
-      //   <DisplayActor props = {posts}/>
-      // </div>
   };
 
 
