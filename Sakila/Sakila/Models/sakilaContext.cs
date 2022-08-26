@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -10,11 +11,29 @@ namespace Sakila.Models
     {
         public sakilaContext()
         {
+
         }
 
         public sakilaContext(DbContextOptions<sakilaContext> options)
             : base(options)
         {
+        }
+
+        public override int SaveChanges()
+        {
+            // Soft-Delete 
+            var entities = ChangeTracker.Entries()
+                .Where(e => e.State == EntityState.Deleted && e.Metadata.GetProperties()
+                .Any(x => x.Name == "IsDeleted"))
+                .ToList();
+
+            foreach (var entity in entities)
+            {
+                entity.State = EntityState.Unchanged;
+                entity.CurrentValues["IsDeleted"] = true;
+            }
+
+            return base.SaveChanges();
         }
 
         public virtual DbSet<Actor> Actors { get; set; }
@@ -70,6 +89,9 @@ namespace Sakila.Models
                     .IsRequired()
                     .HasMaxLength(45)
                     .HasColumnName("last_name");
+
+                entity.Property<bool>(e => e.IsDeleted).HasColumnName("isDeleted");
+
             });
 
             modelBuilder.Entity<ActorInfo>(entity =>

@@ -27,8 +27,8 @@ namespace Sakila.Services
         }
 
 
-        public IQueryable GetActorNameViaId(short id){
-            IQueryable actor = context.Actors.Where(a => a.ActorId.Equals(id)).Select(a => new{a.FirstName, a.LastName, a.FilmActors}).AsQueryable();
+        public IQueryable GetActorViaId(short id){
+            IQueryable actor = context.Actors.Where(a => a.ActorId.Equals(id)).Select(a => new{a.FirstName, a.LastName, a.FilmActors, a.IsDeleted}).AsQueryable();
             return actor;
         }
 
@@ -120,12 +120,10 @@ namespace Sakila.Services
             }
         }
 
-        public void DeleteAsync(short ActorId)
+        public void DeleteAsync(short ActorId, bool IsDeleted)
         {
-
-            var actor = context.Actors.Where(s => s.ActorId.Equals((short) ActorId)).Delete();
-            context.SaveChanges();
-          
+            var actor = context.Actors.Where(s => s.ActorId.Equals((short)ActorId)).FirstOrDefault();
+            actor.IsDeleted = IsDeleted;
         }
 
     }

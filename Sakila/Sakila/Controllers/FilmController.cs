@@ -52,5 +52,22 @@ namespace Sakila.Controllers
             }).ToList().AsQueryable();
             return film;
         }
+
+        [HttpPut("/updateFilm/{Title=string}/{Description=string}/{ReleaseYear:int}/{LanguageId=string}/{RentalDuration=string}/" +
+            "{RentalRate=decimal}/{Length:int}/{ReplacementCost=decimal}/{Rating=string}")]
+        public void UpdateFilm(string Title, string Description, short ReleaseYear, byte LanguageId,
+            byte RentalDuration, decimal RentalRate, short Length, decimal ReplacementCost, string Rating) {
+            Film film = context.Films.Where(a => a.Title.Equals(Title)).First();
+            film.Title = Title;
+            film.Description = Description;
+            film.ReleaseYear = ReleaseYear;
+            film.LanguageId = LanguageId;
+            film.RentalDuration = RentalDuration;
+            film.RentalRate = RentalRate;
+            film.Length = Length;
+            film.ReplacementCost = ReplacementCost;
+            film.Rating = Rating;
+            context.SaveChanges();
+        }
     }
 }

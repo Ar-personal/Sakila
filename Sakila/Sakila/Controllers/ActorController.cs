@@ -36,7 +36,7 @@ namespace Sakila.Controllers
         public IQueryable GetActorByID(int ActorId)
         {
             actorId = ActorId;
-            return actorRepository.GetActorNameViaId((short) ActorId);
+            return actorRepository.GetActorViaId((short)ActorId);
         }
 
         [HttpPut("/putActor/{FirstName=string}/{LastName=string}")]
@@ -45,12 +45,9 @@ namespace Sakila.Controllers
         }
 
 
-
-
-
         [HttpPut("/updateActorById/{ActorId:int}/{firstName=string}/{lastName=string}")]
         public void UpdateActorById(int ActorId, string firstName, string lastName) {
-            actorRepository.UpdateActorById((short) ActorId, firstName, lastName);
+            actorRepository.UpdateActorById((short)ActorId, firstName, lastName);
         }
 
 
@@ -65,9 +62,9 @@ namespace Sakila.Controllers
             actorRepository.GetActorFilmsById((short)ActorId);
         }
 
-        [HttpDelete("/DeleteActorById/{ActorId:int}")]
-        public void DeleteActorById(int ActorId) {
-            actorRepository.DeleteAsync((short)ActorId);
+        [HttpPut("/DeleteActorById/{ActorId:int}/{IsDeleted:bool}")]
+        public void DeleteActorById(int ActorId, bool isDeleted) {
+            actorRepository.DeleteAsync((short)ActorId, isDeleted);
         }
 
 

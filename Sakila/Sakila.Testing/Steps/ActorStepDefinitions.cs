@@ -103,7 +103,6 @@ namespace Sakila.Testing.Features
 
 
         //scenario 4
-
         [When(@"I make a get request to UpdateActorByID with (.*) and (.*) and (.*)")]
         public async Task WhenIMakeAGetRequestToUpdateActorByIDWithAndAnd(string actorId, string firstName, string lastName)
         {
@@ -123,7 +122,6 @@ namespace Sakila.Testing.Features
         }
 
         //scenario 5
-
         [When(@"I make a get request to GetActorFilmsById with (.*)")]
         public async Task WhenIMakeAGetRequestToGetActorFilmByIdWith(string Id)
         {
